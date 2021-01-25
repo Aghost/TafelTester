@@ -68,7 +68,7 @@ namespace tafeltester_final
                         btnCreateTest.Content = "Grade Test";
                     }
                     else
-                        lblMsg.Content = "Max number size can't exceed expression size!";
+                        lblMsg.Content = "Equations can't exceed max number or 1000";
         }
 
         // Function to create random expressions, a list of labels to displayobjects the expressions and a list of textbox objects
@@ -104,7 +104,7 @@ namespace tafeltester_final
         private void CreateLabel(int num_a, int num_b, int op)
         {
             Label lblNew = new Label();
-            lblNew.Content = $"{num_a} {(char)(op)} {num_b} =\t";
+            lblNew.Content = $"{num_a} {(char)op} {num_b} =\t";
             lblNew.Name = $"Label_{num_a}";
             lblNew.Width = LABEL_WIDTH;
             lblNew.Height = LABEL_HEIGHT;
