@@ -15,8 +15,8 @@ namespace tafeltester_final
         const int TXTB_HEIGHT = 25;
         const int TXTB_WIDTH = 110;
 
-        // OPERATORS in ascii
-        int[] operators = { 47, 42, 43, 45 };
+        // OPERATORS (in specific order)
+        char[] operators = { '/', '+', '*', '-' };
 
         // ARRAYS for the random numbers and user answers
         int[] numRandNumArray = null;
@@ -95,7 +95,7 @@ namespace tafeltester_final
             {
                 int first_num = i + 1;
                 int second_num = numRandNumArray[i];
-                int temp_op;
+                char temp_op;
                 
                 // If/else statement to reduce expression difficulty
                 if ((first_num / second_num) < 1 || first_num == second_num)
@@ -136,14 +136,14 @@ namespace tafeltester_final
         }
 
         // Expression parser to calculate the correct answer
-        private Double ExpressionParser(int a, int b, int op)
+        private Double ExpressionParser(int a, int b, char op)
         {
             switch (op)
             {
-                case 42: return a * b;
-                case 43: return a + b;
-                case 45: return a - b;
-                case 47: return Math.Round(Convert.ToDouble(a) / Convert.ToDouble(b), 2);
+                case '*': return a * b;
+                case '+': return a + b;
+                case '-': return a - b;
+                case '/': return Math.Round(Convert.ToDouble(a) / Convert.ToDouble(b), 2);
                 default: return 0;
             }
         }
