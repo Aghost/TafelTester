@@ -16,7 +16,7 @@ namespace tafeltester_final
         const int TXTB_WIDTH = 110;
 
         // OPERATORS in ascii
-        int[] operators = { 47, 42, 43, 45 };   // ( /, *, +, -) in ascii
+        int[] operators = { 47, 42, 43, 45 };
 
         // ARRAYS for the random numbers and user answers
         int[] numRandNumArray = null;
@@ -35,31 +35,34 @@ namespace tafeltester_final
             InitializeComponent();
         }
 
-        // Button click event;  Recursive, Checks program status with bools
+        // Button click event; Recursive.
+        // Ik zal de volgende keer 2 functies gebruiken ipv 1 Recursieve functie.
         private void btnCreateTest_Click(object sender, RoutedEventArgs e)
         {
+            // Boolean checks to check the status of the program.
             if (isTestCreated)
+            {
                 if (isTestGraded)
                 {
                     RemoveCanvasItems();
-
-                    Array.Clear(numRandNumArray, 0, numRandNumArray.Length);
-                    Array.Clear(answersArray, 0, answersArray.Length);
-                    expLabels.Clear();
-                    expTextBoxes.Clear();
+                    ClearData();
 
                     isTestGraded = false;
                     isTestCreated = false;
 
-                    lblMsg.Content = "";
-                    lblScore.Content = "";
                     btnCreateTest_Click(null, null);
                 }
                 else
+                {
                     CalculateGrade(expTextBoxes.Count);
+                }
+            }
             else
+            {
+                // ExpressionSize/Equation amount input validation. between 0 and 1000, only integers
                 if (int.TryParse(tbExpressionSize.Text, out int expsize) && int.TryParse(tbMaxSize.Text, out int maxsize))
-                    if ((expsize <= maxsize) && (maxsize <= 1000))
+                {
+                    if (expsize <= maxsize && maxsize <= 1000 && maxsize > 0 && expsize > 0)
                     {
                         CreateExpressions(expsize, maxsize);
                         CreateCanvasObjects();
@@ -68,16 +71,23 @@ namespace tafeltester_final
                         btnCreateTest.Content = "Grade Test";
                     }
                     else
-                        lblMsg.Content = "Equations can't exceed max number or 1000";
+                    {
+                        lblMsg.Content = "Invalid amount of equations/highest number size!";
+                    }
+                }
+                else
+                {
+                    lblMsg.Content = "Input error: try integers";
+                }
+            }
         }
 
-        // Function to create random expressions, a list of labels to displayobjects the expressions and a list of textbox objects
+        // Function to create random expressions, a list of labels to display the objects, the expressions and a list of textbox objects
         private void CreateExpressions(int testsize, int max_numsize)
         {
             // Add random nums to array and initialize array for answers
             Random rnd = new Random();
 
-            // Initialize arrays for answers
             numRandNumArray = Enumerable.Range(1, max_numsize).OrderBy(e => rnd.Next()).ToArray();
             answersArray = Enumerable.Repeat(0.0, testsize).ToArray();
 
@@ -86,9 +96,9 @@ namespace tafeltester_final
                 int first_num = i + 1;
                 int second_num = numRandNumArray[i];
                 int temp_op;
-
+                
                 // If/else statement to reduce expression difficulty
-                if (((first_num / second_num) < 1) || (first_num == second_num))
+                if ((first_num / second_num) < 1 || first_num == second_num)
                     temp_op = operators.Skip(1).OrderBy(e => rnd.Next()).First();
                 else
                     temp_op = operators.OrderBy(e => rnd.Next()).First();
@@ -103,26 +113,30 @@ namespace tafeltester_final
         // Creates a label and adds it to expLabels Array
         private void CreateLabel(int num_a, int num_b, int op)
         {
-            Label lblNew = new Label();
-            lblNew.Content = $"{num_a} {(char)op} {num_b} =\t";
-            lblNew.Name = $"Label_{num_a}";
-            lblNew.Width = LABEL_WIDTH;
-            lblNew.Height = LABEL_HEIGHT;
+            Label lblNew = new Label()
+            {
+                Content = $"{num_a} {(char)op} {num_b} =\t",
+                Name = $"Label_{num_a}",
+                Width = LABEL_WIDTH,
+                Height = LABEL_HEIGHT,
+            };
             expLabels.Add(lblNew);
         }
 
         // Creates a textbox and adds it to expTextBoxes Array
         private void CreateTextBox(int name)
         {
-            TextBox txtBoxNew = new TextBox();
-            txtBoxNew.Name = $"tb_{name}";
-            txtBoxNew.Width = TXTB_WIDTH;
-            txtBoxNew.Height = TXTB_HEIGHT;
+            TextBox txtBoxNew = new TextBox()
+            {
+                Name = $"tb_{name}",
+                Width = TXTB_WIDTH,
+                Height = TXTB_HEIGHT,
+            };
             expTextBoxes.Add(txtBoxNew);
         }
 
         // Expression parser to calculate the correct answer
-        public Double ExpressionParser(int a, int b, int op)
+        private Double ExpressionParser(int a, int b, int op)
         {
             switch (op)
             {
@@ -166,6 +180,18 @@ namespace tafeltester_final
             }
         }
 
+        // Clears the data from the Arrays, clears labels(for the expressions) and labelcontents
+        private void ClearData()
+        {
+            Array.Clear(numRandNumArray, 0, numRandNumArray.Length);
+            Array.Clear(answersArray, 0, answersArray.Length);
+            expLabels.Clear();
+            expTextBoxes.Clear();
+
+            lblMsg.Content = "";
+            lblScore.Content = "";
+        }
+
         // Calculate the grade
         private void CalculateGrade(int testsize)
         {
@@ -179,19 +205,23 @@ namespace tafeltester_final
                 for (int i = 0; i < testsize; i++)
                 {
                     if (Double.TryParse(expTextBoxes[i].Text, out number))
+                    {
                         if (number == answersArray[i])
                         {
                             expTextBoxes[i].Foreground = Brushes.Green;
                             points += 1;
                         }
-                        else
-                            expTextBoxes[i].Foreground = Brushes.Red;
+                    }
+                    else
+                    {
+                        expTextBoxes[i].Foreground = Brushes.Red;
+                    }
 
                     Console.WriteLine($"i: {i}\tuser:{expTextBoxes[i].Text} \tanswer: {answersArray[i]}");      //debug
                 }
 
                 double grade = Math.Round(Convert.ToDouble(points) / Convert.ToDouble(expTextBoxes.Count) * 10);
-                Console.WriteLine($"\npoints = {points}\ngrade = {grade}");     //debug
+                Console.WriteLine($"\npoints = {points}\ngrade = {grade}");                                     //debug
 
                 lblScore.Content = grade;
 
