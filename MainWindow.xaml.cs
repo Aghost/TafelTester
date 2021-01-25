@@ -59,7 +59,7 @@ namespace tafeltester_final
                     CalculateGrade(expTextBoxes.Count);
             else
                 if (int.TryParse(tbExpressionSize.Text, out int expsize) && int.TryParse(tbMaxSize.Text, out int maxsize))
-                    if (expsize <= maxsize)
+                    if ((expsize <= maxsize) && (maxsize <= 1000))
                     {
                         CreateExpressions(expsize, maxsize);
                         CreateCanvasObjects();

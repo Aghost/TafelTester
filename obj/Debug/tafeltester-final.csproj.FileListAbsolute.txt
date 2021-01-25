@@ -1,0 +1,15 @@
+C:\Users\deploy\source\repos\tafeltester-final\bin\Debug\tafeltester-final.exe.config
+C:\Users\deploy\source\repos\tafeltester-final\bin\Debug\tafeltester-final.exe
+C:\Users\deploy\source\repos\tafeltester-final\bin\Debug\tafeltester-final.pdb
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\tafeltester-final.csprojAssemblyReference.cache
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\MainWindow.g.cs
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\App.g.cs
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\tafeltester-final_MarkupCompile.cache
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\tafeltester-final_MarkupCompile.lref
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\MainWindow.baml
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\tafeltester-final.g.resources
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\tafeltester_final.Properties.Resources.resources
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\tafeltester-final.csproj.GenerateResource.cache
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\tafeltester-final.csproj.CoreCompileInputs.cache
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\tafeltester-final.exe
+C:\Users\deploy\source\repos\tafeltester-final\obj\Debug\tafeltester-final.pdb
